@@ -1,0 +1,76 @@
+<div class="switchcomp">
+    <div class="row switch-sec m-0">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+            <h1 class="switch"> Companies</h1>
+        </div>
+        
+
+    </div>
+    <div class=" errordiv text-center" *ngIf="errorMsgFlag">
+        <p class="error">{{errorMsg}}</p>
+    </div>
+    <div class="swtichtab">
+
+        <div class="row m-0 justify-content-center">
+
+
+            <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col 12">
+                <p class="select">Please select the company you want to switch to</p>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Company Name</th>
+                                <th scope="col">Last Connected Time</th>
+                                <th scope="col">Realm Id</th>
+                                <th scope="col">Time Zone</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let tab of Company ; let i = index"
+                                [ngClass]="{back: isChecked == tab.realmId}">
+                                <td>
+                                    <i class="fa fa-check" *ngIf="isChecked == tab.realmId"></i>
+                                    <!-- <input type="radio" [checked]="isChecked == tab.realmId" [value]="tab.realmId"
+                                        [hidden]="tab.status ==1" name="tab"
+                                        (change)="handleChange($event.target.value)" [disabled]="disableBtns"> -->
+                                </td>
+                                <td>{{ tab.compName }}</td>
+                                <td>{{ tab.lastConnectedTime }}</td>
+                                <td>{{ tab.realmId }}</td>
+                                <td>{{ tab.tmz }}</td>
+                                <td>{{tab.statusdesc}}</td>
+                                <td>
+                                    <div [matMenuTriggerFor]="beforeMenu">
+                                        <span class="fa fa-bars "></span>
+                                        <mat-menu #beforeMenu="matMenu" xPosition="before" class="comp_menu">
+                                            <div mat-menu-item href="javascript:void(0)" (click)="disconnectQB(tab)">
+                                                Disconnect</div>
+                                            <div mat-menu-item (click)="editTime(tab)">
+                                                Edit Timezone</div>
+                                        </mat-menu>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="add_comp">
+            <div class="row   justify-content-center m-0">
+                <div class="col-xl-8 col-lg-8 col-md-10 col-sm-10 col-12 text-center ">
+                    <div class="add_box ">
+                        <p class="add_text"> Please click on Connect to QuickBooks to add new company</p>
+                        <div class="image  mx-auto" (click)="addCompany()"></div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+</div>

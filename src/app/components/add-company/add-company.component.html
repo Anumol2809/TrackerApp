@@ -1,0 +1,20 @@
+<div class="addcomp">
+    <div class="add-sec">
+        <h1 class="add">Add Company</h1>
+    </div>
+    <div class=" errordiv text-center" *ngIf="errorMsgFlag">
+        <p class="error">{{errorMsg}}</p>
+    </div>
+    <div class="add_data ">
+        <div class="row   justify-content-center align-items-center m-0">
+            <div class="col-xl-8 col-lg-8 col-md-10 col-sm-10 col-12 text-center ">
+                <div class="add_box ">
+                    <p class="select"> Please click on Connect to QuickBooks to add new company</p>
+                    <div class="image  mx-auto" (click)="addCompany()"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

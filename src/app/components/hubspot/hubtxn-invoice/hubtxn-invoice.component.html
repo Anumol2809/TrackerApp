@@ -1,0 +1,166 @@
+
+<div class="rec_page">
+            <div class="inv_page">
+                <div class=" admin_tab">
+                    <div class="row">
+                     
+                    <div class=" divide">
+                    <p class="list_text">Current</p>
+                    <p class="list_head">$130000</p>
+                    <p class="list_text"> <span>10</span>  Invoices</p>
+                  </div>
+                  <div class=" divide">
+                    <p class="list_text">1 -30</p>
+                    <p class="list_head">$200000</p>
+                    <p class="list_text"><span>15 </span>Invoices</p>
+                  </div>
+                  <div class=" divide">
+                    <p class="list_text">31-60</p>
+                    <p class="list_head">$125000</p>
+                    <p class="list_text"><span>6</span> Invoices</p>
+                  </div>
+                  <div class=" divide">
+                    <p class="list_text">61-90</p>
+                    <p class="list_head">$50000</p>
+                    <p class="list_text"><span>70</span> Invoices</p>
+                  </div>
+                  <!-- <div class=" divide">
+                    <p class="list_text">71-100</p>
+                    <p class="list_head">$26.5MM</p>
+                    <p class="list_text"><span>100</span> Invoices</p>
+                  </div> -->
+                  <div class="divide_lst">
+                    <p class="list_text">90+</p>
+                    <p class="list_head">$35000</p>
+                    <p class="list_text"><span>70</span> Invoices</p>
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="row m-0 mt-3">
+                <div class="col-10">
+                    <div class="input-field">
+                        <i class="fa fa-search"></i>
+                        <input type="search" class="form-control" placeholder="Company , Name , Invoice ,#" aria-label="Search" aria-describedby="search-addon" />
+                        
+                      </div>
+                </div>
+                <div class="col-2 text-end">
+                    <button class="btn downBtn">Download Table</button>
+                </div>
+              </div>
+           
+          <div class="table-container">
+            <table mat-table [dataSource]="this.rows" *ngIf="!IsTable">
+
+              <!-- Checkbox Column -->
+          
+              <ng-container matColumnDef="checkbox">
+                 <th mat-header-cell *matHeaderCellDef class="custom-checkbox-header">
+                   <mat-checkbox (change)="$event ? masterToggle() : null ; selectCheck($event)" class="custom-checkbox" 
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()">
+                  </mat-checkbox> 
+                 
+                </th>
+                <td mat-cell *matCellDef="let row">
+                  <mat-checkbox (click)="$event.stopPropagation()" class="custom-checkbox"
+                                (change)="$event ? selection.toggle(row) : null  ; selectCheck($event)"
+                                [checked]="selection.isSelected(row)">
+                  </mat-checkbox>
+                </td> 
+          
+              </ng-container>
+            
+             
+              <ng-container *ngFor="let column of tableColumns" [matColumnDef]="column.columnDef">
+                <th mat-header-cell *matHeaderCellDef [style.width]="column.width">{{ column.header }}</th>
+                <td mat-cell *matCellDef="let element" [ngStyle]="{ 'color': getCellStyle(element ,column.columnDef ) }" >
+
+                  <ng-container *ngIf="column.columnDef === 'risk'">
+                    <span class="risk_col" [ngStyle]="getCellStyleCust(element ,column.columnDef )">{{ element[column.columnDef] }}</span>
+          
+                  </ng-container>
+                  <ng-container *ngIf="column.columnDef === 'expDate'">
+                    <p *ngIf="element[column.columnDef]" class="work_row">{{ element[column.columnDef] }}</p>
+                    <div class="date_row" [hidden]="element[column.columnDef]">
+                      <mat-form-field>
+                        
+                        <input matInput [matDatepicker]="picker" class="hidden-input" [(ngModel)]="date">
+                        
+                        <mat-datepicker-toggle matIconSuffix [for]="picker">
+                          <i class="fa fa-plus-circle add_btn" matDatepickerToggleIcon></i>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #picker (closed)="onClose(element)"></mat-datepicker>
+                      </mat-form-field>
+                       <!-- <mat-datepicker-toggle matSuffix [for]="dp">
+                        <i class="fa fa-plus-circle add_btn" matDatepickerToggleIcon></i>
+                      </mat-datepicker-toggle> 
+                       
+                        <input matInput [matDatepicker]="dp" [(ngModel)]="date" class="hidden-input">
+                        <mat-datepicker #dp (closed)="onClose(element)"></mat-datepicker> -->
+
+                    </div>
+                    
+                   
+          
+                  </ng-container>
+                  <ng-container *ngIf=" column.columnDef !== 'risk' && column.columnDef !== 'expDate'">
+                    {{ element[column.columnDef] }}
+                  </ng-container>
+                </td>
+              </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns " ></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'active-class': getRowStyle(row)}" ></tr>
+            </table>
+
+           
+            
+
+            <!-- <input matInput [matDatepicker]="dp" placeholder="Select minimum date" disabled>
+<mat-datepicker-toggle matSuffix [for]="dp">
+  <i class="fa fa-plus" matDatepickerToggleIcon>arrow_drop_down</i>
+</mat-datepicker-toggle>
+<mat-datepicker #dp disabled="false"></mat-datepicker> -->
+          
+
+          </div>
+              
+            </div>
+            
+    
+
+    <div class="select_page" *ngIf="isSelectedRow">
+      <div class="row m-0 ">
+          <div class="col-4">
+              <p class="length"> <i class="fa fa-close clostbtn"  (click)="onCancel() "></i> <span>{{selection.selected.length}}</span>  Items selected</p>
+          </div>
+          <div class="col-2">
+              <div class="box">
+                  <i class="fa fa-envelope"></i>
+                  <p>Send</p>
+              </div>
+          </div>
+          <div class="col-2">
+              <div class="box">
+                  <i class="fa fa-print"></i>
+                  <p>Print</p>
+              </div>
+          </div>
+          <div class="col-2">
+              <div class="box">
+                  <i class="fa fa-edit"></i>
+                  <p>Edit</p>
+              </div>
+          </div>
+          <div class="col-2">
+              <div class="box delete_box">
+                  <i class="fa fa-trash"></i>
+                  <p>Delete</p>
+              </div>
+          </div>
+         
+      </div>
+  </div>
+</div>

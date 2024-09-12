@@ -1,0 +1,87 @@
+.header_nav{
+    //background: transparent linear-gradient(270deg, #1AB754 20%, #1DA299 70%, #C4FAD8 100%) 0% 0% no-repeat padding-box;
+    background-color: #fcfdfd;
+    width: 100%;
+    height: 55px;
+    box-shadow: 0px 0px 15px #00000029;
+    padding-left:13px
+}
+.nav-item{
+    padding: 11px 20px 11px 0;
+}
+.nav-left a{
+  text-decoration: none;
+  color: #2d2d2d;
+  
+}
+ul {
+    list-style-type: none;
+    margin-bottom: 0;
+  }
+  .navbar-collapse{
+    justify-content: end;
+  }
+  .dropdown-toggle::after {
+    content: none;
+  }
+  .bell_icon{
+    border: 1px solid #2D87BB;
+    padding: 6px 6px;
+    border-radius: 50%;
+    color: #fff;
+    background: #2D87BB;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .set_icon{
+    border: 1px solid #EFB110;
+    padding: 4px 5px;
+    border-radius: 50%;
+    color: #fff;
+    background: #EFB110;
+    font-size: 21px;
+    cursor: pointer;
+  }
+.user_icon{
+    border: 1px solid #EA5F89;
+    padding: 4px 7px;
+    border-radius: 50%;
+    color: #fff;
+    background: #EA5F89;
+    font-size: 21px;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    min-width: 120px;
+    right: 8px;
+    left: unset;
+    top: 53px !important;
+    font-size: 14px;
+    padding: 15px;
+    display: none;
+    border-radius: 0;
+    background-color: #fff;
+    border: 1px solid #DEDEDE;
+  }
+  
+.dropdown:hover .dropdown-menu {
+    display: block;
+    
+  }
+
+  .int_link{
+    text-decoration: none;
+    padding: 2px 10px 0 0;
+    display: block;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 500;
+    color: #7cd46c;
+  }
+  .dn_icon
+  {
+    height:32px;
+    width: auto;
+    cursor: pointer;
+  }

@@ -1,0 +1,73 @@
+
+
+<div class="sidebar" [ngClass]="{'open' : sidebarOpen}">
+    <img src="assets/images/Logo.png" class="logo">
+    <i class='fa fa-chevron-left resize_btns'  (click)="closeSidebar()" [hidden]="!sidebarOpen"></i>
+      <div class="logo-details" [hidden]="sidebarOpen">
+            
+            <!-- <div class="logo_name">Dancing Number</div> -->
+            <i class='fa fa-bars resize_btn'  (click)="openSidebar()" ></i>
+            
+        </div>
+        <ul class="nav-list">
+         
+          <li routerLink="dashboard" routerLinkActive="active-route" #rla="routerLinkActive">
+            <b></b>
+            <b></b>
+            <a  >
+              <img class="img" src="{{rla.isActive ? MenuImage.dash_active : MenuImage.dash}}">
+              <span class="links_name">Dashboard</span>
+            </a>
+             <span class="tooltip">Dashboard</span>
+          </li>
+          <li routerLink="activity" routerLinkActive="active-route" #rld="routerLinkActive">
+            <b></b>
+            <b></b>
+           <a >
+            <img class="img1"  src="{{rld.isActive ? MenuImage.log_active : MenuImage.log}}">
+             <span class="links_name">Activity Log</span>
+           </a>
+           <span class="tooltip">Activity Log</span>
+         </li>
+          <li routerLink="transaction" routerLinkActive="active-route" #rlb="routerLinkActive">
+            <b></b>
+            <b></b>
+           <a >
+            <img class="img2"  src="{{rlb.isActive ? MenuImage.trans_active : MenuImage.trans}}">
+             <span class="links_name">Transactions</span>
+           </a>
+           <span class="tooltip">Transactions</span>
+         </li>
+         <li routerLink="schedule" routerLinkActive="active-route" #rlc="routerLinkActive">
+          <b></b>
+            <b></b>
+           <a >
+            <img class="img3"  src="{{rlc.isActive ? MenuImage.sched_active : MenuImage.sched}}">
+             <span class="links_name">Schedule</span>
+           </a>
+           <span class="tooltip">Schedule</span>
+         </li>
+        
+         <li routerLink="integration" routerLinkActive="active-route" #rli="routerLinkActive">
+          <b></b>
+            <b></b>
+           <a >
+            <img class="img4" src="{{rli.isActive ? MenuImage.int_active : MenuImage.int}}">
+             <span class="links_name">Integrations</span>
+           </a>
+           <span class="tooltip">Integrations</span>
+         </li>
+         
+         <li routerLink="settings" routerLinkActive="active-route" #rls="routerLinkActive">
+          <b></b>
+            <b></b>
+           <a >
+            <img class="img5"  src="{{rls.isActive ? MenuImage.set_active : MenuImage.set}}">
+             <span class="links_name">Settings</span>
+           </a>
+           <span class="tooltip">Settings</span>
+         </li>
+        </ul>
+      
+  </div>
+  

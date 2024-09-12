@@ -1,0 +1,45 @@
+<!-- <app-header></app-header>
+<div class="row m-0 p-0 equal">
+    <div class="col-1  sidebarleft" >
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="col m-0 p-0 ">
+        <div class="rout_class">
+            <router-outlet></router-outlet>
+        </div>
+        
+    </div>
+</div>
+ -->
+
+ <!-- <div class="row m-0 p-0" *ngIf="UserLogined">
+  <div class="col-12 p-0  "  [ngClass]="sidebarOpen ? 'header_navsOpen' : 'header_navs'">
+    <app-header></app-header>
+  </div>
+</div> -->
+ <div class="row m-0 p-0 ">
+  <!-- <div class="main_container p-0">
+    <div  [ngClass]="sidebarOpen ? 'sidebaropen' : 'sidebar'" *ngIf="UserLogined">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="content" >
+          <app-header *ngIf="UserLogined"></app-header> 
+      <router-outlet></router-outlet>
+    </div>
+  </div> -->
+ 
+  
+   <div class="main_container p-0">
+  <div [ngClass]="sidebarOpen ? 'sidebaropen' : 'sidebar'" *ngIf="UserLogined">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="cont_container">
+    <app-header *ngIf="UserLogined"></app-header> 
+    <div class="content" >
+      <router-outlet></router-outlet>
+    </div>
+    
+  </div>
+</div>
+
+</div> 

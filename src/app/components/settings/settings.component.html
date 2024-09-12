@@ -1,0 +1,111 @@
+<div class="settings_page">
+
+   
+
+
+    <mat-tab-group  mat-align-tabs="start" (selectedTabChange)="tabClick($event)">
+        <mat-tab *ngFor="let tab of settTabs; let tabInd = index" [label]="tab">
+            <ng-template mat-tab-label>
+              {{ tab }}
+             
+            </ng-template>
+            <div class=" errordiv text-center" *ngIf="errorMsgFlag">
+                <p class="error">{{errorMsg}}</p>
+            </div>
+            <div class="sales_page">
+                <mat-tab-group  mat-align-tabs="start" (selectedTabChange)="tabClickIn($event)" *ngIf="entityLists.length>0">
+            
+                    <mat-tab *ngFor="let tab of entityLists; let tabInd = index" [label]="tab.label">
+                        <ng-template mat-tab-label>
+                          {{ tab.label }}
+                         
+                        </ng-template>
+                         <div class="cust_page">
+                            <div class="row m-0 justify-content-end">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 p-0 text-end">
+                                    <div class="button_container">
+                                        <button type="button" (click)="saveMapping()" class="cust_next_btn" >Save</button>
+                            
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-4 p-0">
+                                    <p class="select_label m-0">{{typeHead}} Type </p>
+                                    <mat-select [(value)]="selectedValue" [(ngModel)]="selectedValue" class="selectCell" (selectionChange)="typeChange($event)">
+                                        <mat-option *ngFor="let type of salesType" [value]="type.entityid">
+                                          {{ type.label }}
+                                        </mat-option>
+                                      </mat-select>
+                                </div>
+                            </div>
+                          
+                                <div class="table-container"  >
+            
+                                    <!-- <table mat-table [dataSource]="rows" >
+                            
+                                        <ng-container matColumnDef="field">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header>  {{tabHead}} Field Name </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.label}} </td>
+                                          </ng-container>
+                                        
+                                          <ng-container matColumnDef="column">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{typeHead}}  Field Name </th>
+                                            <td mat-cell *matCellDef="let element ; let i=index" > 
+                            
+                                              <select (change)="ColumSelectionSales($event, i)" class="custom-select" [(ngModel)]="element.toAttrid" >
+                                                <option *ngFor="let col of HeaderColumns" [value]="col.attrid">{{ col.label }}</option>
+                                              </select>
+                            
+                                                    <mat-form-field >
+                                                        <mat-select (selectionChange)="ColumSelectionSales($event ,i )" (openedChange)="onSelectOpened()"
+                                                        class="selectCellStyle" [value]="element.toAttrid">
+                                                        <mat-option *ngFor="let col of HeaderColumns" [value]="col.attrid">{{ col.label }}</mat-option>
+                                                        </mat-select>
+                                                      </mat-form-field> 
+                            
+                                          
+                                             </td>
+                                          </ng-container>
+                                    
+                                      <tr mat-header-row *matHeaderRowDef="displayedColumns " ></tr>
+                                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"  ></tr>
+                                    </table> -->
+                            
+                                    <ngx-datatable *ngIf="showngxTable"  [rowClass]="getRowClass" class="material"
+                                    [rows]="rows" [columnMode]="'force'" [headerHeight]="47" [footerHeight]="47" [rowHeight]="55"
+                                    [scrollbarH]="true" [scrollbarV]="true" >
+                
+                                    <ngx-datatable-column prop="label" name="{{tabHead}} Field Name" [width]="200">
+                                        <ng-template class="tableCell" ngx-datatable-cell-template let-rowIndex="rowIndex"
+                                            let-value="value" let-row="row">
+                                            <div class="labelStyle">{{value}}
+                                            </div>
+                                        </ng-template>
+                                    </ngx-datatable-column>
+                                    <ngx-datatable-column prop="toAttrid" name="{{typeHead}} Field Name" [width]="200">
+                                        <ng-template class="tableCell" ngx-datatable-cell-template let-rowIndex="rowIndex"
+                                            let-value="value" let-row="row">
+                                            <mat-select (selectionChange)="ColumSelection($event, rowIndex)"
+                                                class="selectCellStyle" [value]="value" >
+                                                <mat-option *ngFor="let col of HeaderColumns" [value]="col.attrid">{{ col.label }}</mat-option>
+                                            </mat-select>
+                
+                                        </ng-template>
+                                    </ngx-datatable-column>
+                                </ngx-datatable>
+                            
+                                  </div>
+                            
+                            
+            
+            
+                        </div> 
+                      </mat-tab>
+                    </mat-tab-group>
+            </div>
+        </mat-tab>
+       
+      
+    </mat-tab-group>
+</div>

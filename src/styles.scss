@@ -1,0 +1,74 @@
+
+@import "~bootstrap/dist/css/bootstrap.css";
+
+ //$fa-font-path: "/node_modules/font-awesome/fonts";
+ @import '~font-awesome/css/font-awesome.css';
+
+ @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+@font-face {
+    font-family: 'Proxima_Nova_Regular';
+    src: url('assets/fonts/ProximaNova-Regular.otf') format('opentype');
+  }
+  
+  @font-face {
+    font-family: 'Proxima_Nova_Thin';
+    src: url('assets/fonts/Proxima Nova Thin.otf') format('opentype');
+  }
+  
+  @font-face {
+    font-family: 'Proxima_Nova_Extrabold';
+    src: url('assets/fonts/Proxima Nova Extrabold.otf') format('opentype');
+  }
+  
+  @font-face {
+    font-family: 'Proxima_Nova_Bold';
+    src: url('assets/fonts/Proxima Nova Bold.otf') format('opentype');
+  }
+  
+  @font-face {
+    font-family: 'Proxima_Nova_Black';
+    src: url('assets/fonts/Proxima Nova Black.otf') format('opentype');
+  }
+  
+  @font-face {
+    font-family: 'Proxima_Nova_Light';
+    src: url('assets/fonts/Proxima Nova Alt Light.otf') format('opentype');
+  }
+  
+  
+  html,
+  body {
+    height: 100%;
+  }
+  
+  body {
+    margin: 0;
+    font-family: Proxima_Nova_Regular;
+  }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.error {
+  color: #FF0000;
+  font-size: 12px;
+  line-height: 12px;
+  position: absolute;
+  font-family: Proxima_Nova_Regular;
+  width: 95%;
+  margin-bottom: 5px;
+}
+.spinner-dialog {
+  width: 9vw !important;
+
+  mat-dialog-container {
+    padding: 0;
+    opacity: 1;
+    text-align: center;
+  }
+}
+.backdropBackground {
+  background-color: #000;
+  opacity: 0.5 !important;
+}
+

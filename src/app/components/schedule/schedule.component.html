@@ -1,0 +1,356 @@
+<!-- <div class="schedule_page">
+    <mat-tab-group  mat-align-tabs="start"  [(selectedIndex)]="selectedIndex"  (selectedTabChange)="onTabChange($event)">
+        <mat-tab >
+            <ng-template mat-tab-label>
+                <span class="label_class" [ngClass]="{'active': selectedIndex == 0}">
+                    <i class="fa " [ngClass]="{
+                        'fa-check': maskSaveStatus[0]=='1',
+                        'fa-close': maskSaveStatus[0]=='0'
+                                }"></i>
+                    Schedule</span>
+    
+            </ng-template>
+            <app-schedule-settings (editedEvent)="eventHandler($event)"></app-schedule-settings>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span class="label_class" [ngClass]="{'active': selectedIndex == 1}">
+                    <i class="fa " [ngClass]="{
+                        'fa-check': maskSaveStatus[1]=='1',
+                        'fa-close': maskSaveStatus[1]=='0'
+                                }"></i>
+                Mapping</span>
+            </ng-template>
+           
+            <app-schedule-mapping *ngIf="selectedIndex == 1"  (maskEvent)="eventHandlerMap($event)"></app-schedule-mapping>
+        </mat-tab>
+       
+    </mat-tab-group>
+    
+</div> -->
+<div class="schedule_page">
+    <!-- <mat-tab-group  mat-align-tabs="start" (selectedTabChange)="tabClick($event)">
+        <mat-tab label="Quickbooks to Salesforce">
+            <app-quickbkto-sales-schedule></app-quickbkto-sales-schedule>
+        </mat-tab>
+        <mat-tab label="Salesforce to Quickbooks" class="msgtab">
+            <p class="msgText">Real Time Transaction updation. Schedule not required.</p>
+            
+        </mat-tab>
+        
+      
+    </mat-tab-group> -->
+
+
+        <mat-tab-group  mat-align-tabs="start" (selectedTabChange)="tabClick($event)">
+            <mat-tab *ngFor="let tab of settTabs; let tabInd = index" [label]="tab">
+                <ng-template mat-tab-label>
+                  {{ tab }}
+                 
+                </ng-template>
+                <div class=" errordiv text-center" *ngIf="errorMsgFlag">
+                    <p class="error">{{errorMsg}}</p>
+                </div>
+                <div class="Quickschedule_page" *ngIf="typeAr.length > 0">
+                    
+                    <mat-tab-group  mat-align-tabs="start" (selectedTabChange)="tabClickIn($event)">
+                        <mat-tab label="Schedule">
+                            <div class="form_cls">
+   
+                                <div class="add_tab" *ngFor="let item of SchdlSett ; let i = index">
+                                    <div class=" admin_tab" [hidden]="(showEdit && editingRow ==item)">
+                                        <div class="row  m-0">
+                                           <div class="col-4 divide">
+                                            <p>Transaction Types</p>
+                                            <span  class="type_txt">{{item.fromEntityName  }}</span>
+                                            
+                                               
+                                           </div>
+                                           <div class="col-4 divide">
+                                            <p>Days</p>
+                                            <span class="type_txt" *ngFor="let val of item.days" >{{val}}</span>
+                                           </div>
+                                           <div class="col-4 ">
+                                            <p class="time_txt">Time</p>
+                                            <span *ngFor="let val of item.times" class="type_txt">{{val.time}}</span>
+                                           </div>
+                                           
+                                        </div>
+                                        <div class="btns_row">
+                                            <button class="btn  editBtn" (click)="editTab(item)" [disabled]="showAdd"><i class="fa fa-edit"></i></button>
+                                            <button class="btn  editBtn" (click)="deleteSchdl(item,i)" [disabled]="showAdd"><i class="fa fa-trash"></i></button>
+                                        </div>
+                                        
+                                    </div>
+                                   
+                                
+                                    <div class=" admin_tab" *ngIf="(showEdit && editingRow ==item)" >
+                                        <div class="row m-0" >
+                                            <div class="col-6">
+                                                <div class="row m-0 ">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label class="type_label">Transaction  Type </label>
+                                                            <!-- <div *ngIf="submitted && g.type.errors" class="error">
+                                                                <div *ngIf="g.type.errors.required">Type is required</div>
+                                                            </div> -->
+                                                            <div class="row m-0">
+                                                                 <div class=" radio_rows" *ngFor="let type of typeAr">
+                                                                    <input type="radio" name="list_name" [checked]="editingRow.fromSysEntityId == type.entityid" [value]="type.entityid"
+                                                                        (change)="checkCheckType($event)" disabled />
+                                                                    <label for="Select" class="check_label">{{type.label}}</label>
+                                                                </div> 
+                                
+                                                                <!-- <div class="radio_rows" *ngFor="let day of typeAr">
+                                                                    <input type="checkbox" name="list_name" [checked]="day.isSelected" value="{{day.id}}"
+                                                                        (change)="checkCheckType($event)" />
+                                                                    <label for="Select" class="check_label">{{day.value}}</label>
+                                                
+                                                                </div> -->
+                                                            </div>
+                                                           
+                                                          
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row m-0 form_row">
+                                                    <div class="allcheck_row">
+                                                        <input type="checkbox" name="list_name" [checked]="AllSelected" value="all"
+                                                            (change)="checkCheckAll($event)" />
+                                                        <label for="All Select" class="check_labelAll">All days</label>
+                                        
+                                                    </div>
+                                                    <div class="check_row row m-0">
+                                                        <div class="check_val" *ngFor="let day of DayAr">
+                                                            <input type="checkbox" name="list_name" [checked]="day.isSelected" value="{{day.id}}"
+                                                                (change)="checkCheck($event)" />
+                                                            <label for="Select" class="check_label">{{day.value}}</label>
+                                        
+                                                        </div>
+                                        
+                                                    </div>
+
+                                                    <div *ngIf="submitted && selLength == 0" class="error pos_absolute">
+                                                        <div>Please select days</div>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                        
+                                        
+                                                <div class="col-12 p-0">
+                                                    <div class="form_time">
+                                                        <label class="time_lab">Schedule Time</label>
+                                        
+                                                        <ngx-material-timepicker #picker (timeSet)="timeChange($event ,i)"
+                                                            [format]="24"></ngx-material-timepicker>
+                                                        <button class="btn timeBtn" [ngxTimepicker]="picker" [format]="24">Select Time
+                                                            <i class="fa fa-clock-o time_icon"></i>
+                                                        </button>
+                                        
+                                                        <div *ngIf="submitted && TimeAr.length == 0" class="error ">
+                                                            <div>Please select schedule time</div>
+                                                        </div> 
+                                                        <!-- <div *ngIf="submitted && TimeAr.length == 0" class="error ">
+                                                            <div>Please select schedule time</div>
+                                                        </div> -->
+                                        
+                                        
+                                                    </div>
+                                        
+                                                    <div class="timeAr" [hidden]="TimeAr.length == 0">
+                                                        <div class="times" *ngFor="let dt of TimeAr">
+                                                            <p>{{dt.time}}</p>
+                                                            <i class="fa fa-minus-circle close_icon" (click)="removeTime(dt,i)"></i>
+                                                        </div>
+                                        
+                                                    </div>
+                                        
+                                        
+                                        
+                                                </div>
+                                        
+                                            </div>
+                                        </div>
+                                        <div class="row m-0 justify-content-end">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 text-end">
+                                              
+                                                <button type="button" (click)="cancelEdit()" class="cust_next_btn cancelBtn"  >Cancel</button>
+                                                <button type="button" (click)="saveTab(item)" class="cust_next_btn"   >Save</button>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                    
+                                </div>
+                                <div class=" admin_tab" *ngIf="(showAdd) " >
+                                    <div class="row m-0" >
+                                        <div class="col-6">
+                                            <div class="row m-0 ">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label class="type_label">Transaction  Type </label>
+                                                        <!-- <div *ngIf="submitted && g.type.errors" class="error ">
+                                                            <div *ngIf="g.type.errors.required">Type is required</div>
+                                                        </div> -->
+                                                        <div class="row m-0">
+                                                            <div class=" radio_rows" *ngFor="let type of typeAr">
+                                                                <input type="radio" name="list_name"  [value]="type.entityid"
+                                                                    (change)="checkCheckType($event)" />
+                                                                <label for="Select" class="check_label">{{type.label}}</label>
+                                                            </div> 
+                                
+                                                            <!-- <div class="radio_rows" *ngFor="let day of typeAr">
+                                                                <input type="checkbox" name="list_name" [checked]="day.isSelected" value="{{day.id}}"
+                                                                    (change)="checkCheckType($event)" />
+                                                                <label for="Select" class="check_label">{{day.value}}</label>
+                                            
+                                                            </div> -->
+                                                        </div>
+                                                        <div *ngIf="submitted && selectedEntityId == null" class="error">
+                                                            <div>Please select type</div>
+                                                        </div> 
+                                                      
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row m-0 form_row">
+                                                <div class="allcheck_row">
+                                                    <input type="checkbox" name="list_name" [checked]="AllSelected" value="all"
+                                                        (change)="checkCheckAll($event)" />
+                                                    <label for="All Select" class="check_labelAll">All days</label>
+                                    
+                                                </div>
+                                                <div class="check_row row m-0">
+                                                    <div class="check_val" *ngFor="let day of DayAr">
+                                                        <input type="checkbox" name="list_name" [checked]="day.isSelected" value="{{day.id}}"
+                                                            (change)="checkCheck($event)" />
+                                                        <label for="Select" class="check_label">{{day.value}}</label>
+                                    
+                                                    </div>
+                                    
+                                                </div>
+
+                                                <div *ngIf="submitted && selLength == 0" class="error pos_absolute">
+                                                    <div>Please select days</div>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                    
+                                    
+                                            <div class="col-12 p-0">
+                                                <div class="form_time">
+                                                    <label class="time_lab">Schedule Time</label>
+                                    
+                                                    <ngx-material-timepicker #picker (timeSet)="timeChangeadd($event)"
+                                                        [format]="24"></ngx-material-timepicker>
+                                                    <button class="btn timeBtn" [ngxTimepicker]="picker" [format]="24">Select Time
+                                                        <i class="fa fa-clock-o time_icon"></i>
+                                                    </button>
+                                    
+                                                   <div *ngIf="submitted && TimeArNew.length == 0" class="error ">
+                                                        <div>Please select schedule time</div>
+                                                    </div> 
+                                    
+                                    
+                                                </div>
+                                    
+                                                <div class="timeAr" [hidden]="TimeArNew.length == 0">
+                                                    <div class="times" *ngFor="let dt of TimeArNew">
+                                                        <p>{{dt.time}}</p>
+                                                        <i class="fa fa-minus-circle close_icon" (click)="removeTimeNew(dt)"></i>
+                                                    </div>
+                                    
+                                                </div>
+                                    
+                                    
+                                    
+                                            </div>
+                                    
+                                        </div>
+                                    </div>
+                                    <div class="row m-0 justify-content-end">
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 text-end">
+                                           
+                                            <button type="button" (click)="cancelClick()" class="cust_next_btn cancelBtn"  [disabled]="showEdit">Cancel</button>
+                                            <button type="button" (click)="addNewSave()" class="cust_next_btn"  [disabled]="showEdit">Save</button>
+                                
+                                            
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                                
+                                
+                                
+                                <div class="row m-0 justify-content-end">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 p-0 text-end">
+                                        <div class="button_container">
+                                            <button type="button" (click)="addNew()" class="cust_next_btn" *ngIf="!addNewSet" [disabled]="showEdit">Add New Schedule</button>
+                                
+                                        </div>
+                                    </div>
+                                </div>
+                                   
+                                
+                                
+                                
+                                
+                                </div>
+                        </mat-tab>
+                        <mat-tab label="Upcoming Jobs">
+                            <div class="table_row">
+                                <div class="table-container">
+                
+                                    <table mat-table [dataSource]="this.UpRows" >
+                            
+                                        <ng-container *ngFor="let column of tableColumns" [matColumnDef]="column.columnDef">
+                                            <th mat-header-cell *matHeaderCellDef [style.width]="column.width">{{ column.header }}</th>
+                                            <td mat-cell *matCellDef="let element"  [ngStyle]="{ 'color': getCellStyle(element ,column.columnDef ) }"> {{ element[column.columnDef] }} </td>
+                                          </ng-container>
+                                        
+                                    
+                                    
+                                      <tr mat-header-row *matHeaderRowDef="displayedColumnsUp " ></tr>
+                                      <tr mat-row *matRowDef="let row; columns: displayedColumnsUp;"  ></tr>
+                                    </table>
+                            
+                                   
+                            
+                                  </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Completed Jobs">
+                            <div class="table_row">
+                                <div class="table-container">
+                
+                                    <table mat-table [dataSource]="this.CompRows" >
+                            
+                                        <ng-container *ngFor="let column of tableColumns" [matColumnDef]="column.columnDef">
+                                            <th mat-header-cell *matHeaderCellDef [style.width]="column.width">{{ column.header }}</th>
+                                            <td mat-cell *matCellDef="let element" [ngStyle]="{ 'color': getCellStyle(element ,column.columnDef ) }"> {{ element[column.columnDef] }} </td>
+                                          </ng-container>
+                                        
+                                    
+                                      <tr mat-header-row *matHeaderRowDef="displayedColumnsComp " ></tr>
+                                      <tr mat-row *matRowDef="let row; columns: displayedColumnsComp;"  ></tr>
+                                    </table>
+                            
+                                   
+                            
+                                  </div>
+                            </div>
+                        </mat-tab>
+                        
+                      
+                    </mat-tab-group>
+                </div>
+                <div class="msg_row" *ngIf="typeAr.length == 0" class="msgtab"> 
+                    <p class="msgText">Real Time Transaction updation. Schedule not required.</p>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+</div>

@@ -1,0 +1,39 @@
+
+.cust_next_btn {
+    width: 93px;
+    height: 32px;
+    background: #54CB9B 0% 0% no-repeat padding-box;
+    border: 2px solid #54CB9B;
+    color: white;
+    font-family: Proxima_Nova_Regular;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 5px;
+   margin-left: auto;
+   margin-right: 15px;
+   display: block;
+    outline: none;
+  }
+  .select_head{
+    font-size: 18px;
+    font-family: "Proxima_Nova_Bold";
+  }
+  .head_row{
+    height: 44px;
+    padding: 11px 15px 10px 8px;
+    border-bottom: 1px solid #dedede;
+  }
+.radiobtns{
+    padding: 11px 15px 10px 8px;
+}
+  .radio_input_label{
+   
+    padding: 7px 0 5px 15px;
+  }
+  .closebtn{
+    position: absolute;
+    top: 10px;
+    font-size: 17px;
+    right: 14px;
+    cursor: pointer;
+   }

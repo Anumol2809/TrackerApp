@@ -1,0 +1,38 @@
+
+<div class="txn_page">
+    <div class="hub-content" *ngIf="selectedInt == 2">
+        <mat-tab-group  mat-align-tabs="start" (selectedTabChange)="tabClick($event)">
+            <mat-tab label="Invoices">
+                <app-hubtxn-invoice></app-hubtxn-invoice>
+            </mat-tab>
+            <mat-tab label="Deals">
+                <app-hubtxn-deals></app-hubtxn-deals>
+            </mat-tab>
+            <mat-tab label="Customer">
+                <app-hubtxn-customer></app-hubtxn-customer>
+            </mat-tab>
+            <mat-tab label="Product and Service">
+                <app-hubtxn-product-service></app-hubtxn-product-service>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+
+    <div class="hub-content" *ngIf="selectedInt == 3">
+        <mat-tab-group  mat-align-tabs="start" (selectedTabChange)="tabClick($event)">
+            <mat-tab label="Invoices">
+                <app-txn-invoice></app-txn-invoice>
+            </mat-tab>
+            
+            <mat-tab label="Customer">
+                <app-txn-customer></app-txn-customer>
+            </mat-tab>
+            <mat-tab label="Opportunity">
+                <app-txn-opportunity></app-txn-opportunity>
+            </mat-tab>
+            <mat-tab label="Product and Service">
+                <app-txn-product-service></app-txn-product-service>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
+

@@ -1,0 +1,182 @@
+
+<!-- <app-hubspot-activity *ngIf="selectedInt == 'Hubspot'"></app-hubspot-activity>
+
+<app-salesforce-activity *ngIf="selectedInt == 'Salesforce'"></app-salesforce-activity> -->
+
+
+<div class="activity_page">
+
+    <mat-tab-group  mat-align-tabs="start" (selectedTabChange)="tabClick($event)">
+        <mat-tab *ngFor="let tab of settTabs; let tabInd = index" [label]="tab">
+            <ng-template mat-tab-label>
+              {{ tab }}
+             
+            </ng-template>
+            <div class="active_content">
+                <div class=" errordiv text-center" *ngIf="errorMsgFlag">
+                    <p class="error">{{errorMsg}}</p>
+                </div>
+                
+                <div class="row m-0 search_row">
+                    <div class="col-8 p-0 ">
+                        <div class="input-field">
+                            <i class="fa fa-search" (click)="serachId()"></i>
+                            <input type="search" class="form-control" placeholder="Search JobId.." aria-label="Search" aria-describedby="search-addon" [(ngModel)]="serachVal"/>
+                            
+                          </div>
+                    </div>
+                    <div class="col-4 p-0 text-end">
+                        <button class="btn addFilter" (click)="addFilter()">
+                            <i class="fa fa-plus"></i>
+                            Add Filter
+                        </button>
+                    </div>
+                    
+                   </div>
+                   <div class="form_box" *ngIf="addFilters">
+                    <form [formGroup]="filterForm">
+                        <div class="row m-0">
+                            <div class="col-3">
+                                <p class="select_label m-0">From Date  </p>
+                               
+                                    <div class="form-group">
+                                        <input matInput [matDatepicker]="picker" class="selectinput" formControlName="fromRunDate" placeholder="MM/DD/YYYY">
+                                        <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </div>
+                                   
+                                
+                                <!-- <input type="datetime-local" class="selectinput selectCell" formControlName="fromRunDate" placeholder="choose date" step="1">
+                               -->
+                                 
+                            </div>
+                            <div class="col-3">
+                                <p class="select_label m-0">To Date  </p>
+                                <!-- <input type="datetime-local" class="selectinput selectCell" placeholder="choose date" formControlName="toRunDate" step="1">
+                               -->
+                               <div class="form-group">
+                                <input matInput [matDatepicker]="picker1" class="selectinput" formControlName="toRunDate" placeholder="MM/DD/YYYY">
+                                <mat-datepicker-toggle matSuffix [for]="picker1" ></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                            </div>
+                            </div>
+                            <div class="col-3">
+                                <p class="select_label m-0">Type </p>
+                                <mat-select  formControlName="type" class="selectCell" >
+                                    <mat-option *ngFor="let type of typesAr" [value]="type.entityid">
+                                      {{ type.label }}
+                                    </mat-option>
+                                  </mat-select>
+                            </div>
+
+                            <div class="col-3">
+                                <p class="select_label m-0">Status</p>
+                                <mat-select  formControlName="status" class="selectCell" >
+                                    <mat-option  [value]="sts.entityId" *ngFor="let sts of statusAr">{{sts.status}} </mat-option>
+                                    
+                                  </mat-select>
+                            </div>
+                            <div class="row justify-content-end m-0">
+                                <button class="btn  saveBtn cancelBtn" (click)="cancelFilter()">Cancel</button>
+                                <button class="btn  saveBtn" (click)="saveFilter()">Save</button>
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+                    <div class="row m-0">
+                        <div class="filter_col p-0" *ngFor="let col of filterRows">
+                            <div class="filterBox">
+                                <p [hidden]="col.col == 'Date'">{{col.col}} - {{col.value}}</p>
+                                <p *ngIf="col.col == 'Date'">{{col.col}} - {{col.value1}} to {{col.value2}}</p>
+                                <i class="fa fa-times" (click)="removeFilter(col)"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-0">
+                        <ngx-datatable *ngIf="showngxTable" 
+                    class="material" [rows]="rows" 
+                     [columnMode]="'force'" [scrollbarH]="true" [scrollbarV]="true"
+                    [headerHeight]="52" [footerHeight]="52" [rowHeight]="55">
+
+                    
+                    <ngx-datatable-column *ngFor="let col of tableColumns" [width]="col.width" [name]="col.name"
+                        [prop]="col.prop">
+
+                        <ng-template class="tableCell" ngx-datatable-cell-template let-rowIndex="rowIndex"
+                            let-value="value" let-row="row"> 
+
+                            <div *ngIf="col.prop == 'detail'">
+                                <a href="Javascript:void(0)" class="detail_link">DETAIL</a>
+                                
+                            </div> 
+                            <div *ngIf="col.prop == 'job'">
+                                <p class="label_txt">JobId  : <span>{{row.jobId}}</span></p>
+                                <p class="label_txt">Type  :  <span>{{row.type}}</span> </p>
+                            </div> 
+                            <div *ngIf="col.prop == 'records'">
+                                <p class="label_txt">Total  : <span>{{row.processedRecord}}</span></p>
+                                <p class="label_txt">Imported  :  <span>{{row.successRecord }}</span> </p>
+                                
+                            </div> 
+                            <div *ngIf="col.prop == 'rundate' || col.prop == 'statusResponse'" 
+                            [ngStyle]="{ 'color': getCellStyle(row ,col.prop )}">
+                            <p class="label_text"> {{value}}</p>
+                                
+                            </div>
+                           
+                            
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-footer>
+                        <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize"
+                            let-selectedCount="selectedCount" let-curPage="pagenumber" let-offset="offset"
+                            let-isVisible="isVisible">
+
+                            <div class="datatable-footer-inner selected-count">
+                                <div class="page-count">
+                                    <span> <span *ngIf="endcount!=0">{{startcount}} -</span>
+                                        {{endcount}} of
+                                        {{totalCount}}
+                                        Rows</span>
+
+                                </div>
+                                <div class="datatable-pager">
+                                    <ul class="pager">
+                                        <li class="pages active" role="button" aria-label="next">
+                                            <button class="btn  back_button" [disabled]="pagenumber == 1"
+                                                (click)="previous()">Previous</button>
+                                        </li>
+                                        <li class="pages active" role="button" aria-label="next">
+                                            <button class="btn pagenumber syncbtn "
+                                                tabindex="-1">{{pagenumber}}</button>
+                                        </li>
+                                        <li class="pages active" role="button" aria-label="next">
+                                            <button class="btn  back_button" [disabled]="nextDisabledStatus()"
+                                                (click)="next()">Next</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </ng-template>
+                    </ngx-datatable-footer>
+                </ngx-datatable>
+                    </div>
+            </div>
+
+        </mat-tab>
+    </mat-tab-group>
+    <!-- <mat-tab-group  mat-align-tabs="start" (selectedTabChange)="tabClick($event)">
+        <mat-tab label="Quickbooks to Salesforce">
+            <app-hubspot-activity ></app-hubspot-activity>
+        </mat-tab>
+        <mat-tab label="Salesforce to Quickbooks" class="msgtab">
+            <p class="msgText">Real Time updation, please check salesforce transaction for status.</p>
+            
+        </mat-tab>
+        
+      
+    </mat-tab-group> -->
+</div>

@@ -1,0 +1,123 @@
+<div class="inv_page cust_tab">
+    <div class=" admin_tab">
+        <div class="row">
+          <div class=" divide">
+            <p class="list_text">Current</p>
+            <p class="list_head">$130000</p>
+            <p class="list_text"> <span>10</span>  Customers</p>
+          </div>
+          <div class=" divide">
+            <p class="list_text">1 -30</p>
+            <p class="list_head">$200000</p>
+            <p class="list_text"><span>15 </span>Customers</p>
+          </div>
+          <div class=" divide">
+            <p class="list_text">31-60</p>
+            <p class="list_head">$125000</p>
+            <p class="list_text"><span>6</span> Customers</p>
+          </div>
+          <div class=" divide">
+            <p class="list_text">61-90</p>
+            <p class="list_head">$50000</p>
+            <p class="list_text"><span>70</span> Customers</p>
+          </div>
+          <!-- <div class=" divide">
+            <p class="list_text">71-100</p>
+            <p class="list_head">$26.5MM</p>
+            <p class="list_text"><span>100</span> Customers</p>
+          </div> -->
+          <div class="divide_lst">
+            <p class="list_text">90+</p>
+            <p class="list_head">$35000</p>
+            <p class="list_text"><span>70</span> Customers</p>
+          </div>
+      
+    </div>
+  </div>
+  <div class="row m-0 mt-3">
+    <div class="col-10">
+        <div class="input-field">
+            <i class="fa fa-search"></i>
+            <input type="search" class="form-control" placeholder="Company , Name , Invoice ,#" aria-label="Search" aria-describedby="search-addon" />
+            
+          </div>
+    </div>
+    <div class="col-2 text-end">
+        <button class="btn downBtn">Download Table</button>
+    </div>
+  </div>
+ 
+<div class="table-container">
+<table mat-table [dataSource]="this.rowsCust" >
+
+
+<ng-container matColumnDef="radio">
+<th mat-header-cell *matHeaderCellDef class="custom-checkbox-header"></th>
+<td mat-cell *matCellDef="let row">
+<mat-radio-button
+(click)="$event.stopPropagation()"
+(change)="$event ? selection.toggle(row) : null ; selectCheck(row)"
+[checked]="selection.isSelected(row)">
+</mat-radio-button>
+</td>
+</ng-container>
+
+
+<ng-container *ngFor="let column of tableColumns" [matColumnDef]="column.columnDef">
+<th mat-header-cell *matHeaderCellDef [attr.colspan]="1" [style.width]="column.width">{{ column.header }}</th>
+<td mat-cell *matCellDef="let element" >
+
+<ng-container *ngIf="column.columnDef === 'risk'">
+  <span class="risk_col" [ngStyle]="getCellStyleCust(element ,column.columnDef )">{{ element[column.columnDef] }}</span>
+  
+</ng-container>
+<ng-container *ngIf="column.columnDef === 'workflow'">
+  <p *ngIf="element[column.columnDef]" class="work_row">{{ element[column.columnDef] }}<i class="fa fa-edit editBtn" (click)="addWorkFlow(element ,element[column.columnDef] )"></i></p>
+  <p [hidden]="element[column.columnDef]" class="work_row add_btn"><i class="fa fa-plus-circle" (click)="addWorkFlow(element ,null)"></i></p>
+</ng-container>
+
+<ng-container *ngIf="column.columnDef !== 'workflow' && column.columnDef !== 'risk'">
+  {{ element[column.columnDef] }}
+</ng-container>
+</td>
+
+
+</ng-container>
+
+<tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+<tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'active-class': getRowStyle(row)}"></tr> 
+</table>
+</div>
+<div class="select_page" *ngIf="isSelectedRow">
+    <div class="row m-0 ">
+      <div class="col-4">
+          <p class="length"> <i class="fa fa-close clostbtn"  (click)="onCancel() "></i> <span>{{selection.selected.length}}</span>  Items selected</p>
+      </div>
+      <div class="col-2">
+          <div class="box">
+              <i class="fa fa-envelope"></i>
+              <p>Send</p>
+          </div>
+      </div>
+      <div class="col-2">
+          <div class="box">
+              <i class="fa fa-print"></i>
+              <p>Print</p>
+          </div>
+      </div>
+      <div class="col-2">
+          <div class="box">
+              <i class="fa fa-edit"></i>
+              <p>Edit</p>
+          </div>
+      </div>
+      <div class="col-2">
+          <div class="box delete_box">
+              <i class="fa fa-trash"></i>
+              <p>Delete</p>
+          </div>
+      </div>
+     
+    </div>
+    </div>
+</div>

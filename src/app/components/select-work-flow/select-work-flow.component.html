@@ -1,0 +1,37 @@
+
+<div class="select_page">
+    <div class="row m-0 head_row">
+        <div class="col-11">
+            <h1 class="select_head">Add Work Flow</h1>
+        </div>
+        <div class="col-1">
+            <i class="fa fa-times closebtn" (click)="onCancel()"></i>
+        </div>
+    </div>
+
+    <div class="row m-0 radiobtns">
+        <div class="col-12">
+            <div class="radio_rows">
+                <input type="radio"   class="radiobtns"  
+                name="actionDt" value="Slow Payers" [(ngModel)]="workFlow">
+                <label class="radio_input_label m-0">Slow Payers</label>
+            </div>
+            <div class="radio_rows">
+                <input type="radio"   class="radiobtns" 
+                name="actionDt" value="Prompt Payers" [(ngModel)]="workFlow">
+                <label class="radio_input_label m-0">Prompt Payers</label>
+            </div>
+            <div class="radio_rows">
+                <input type="radio"   class="radiobtns" 
+                name="actionDt" value="Normal Payers" [(ngModel)]="workFlow">
+               <label class="radio_input_label m-0">Normal Payers</label>
+            </div>
+            
+        </div>
+        
+
+   
+    </div>
+</div>
+
+<button type="button" (click)="onSubmit()" class="cust_next_btn">Save</button>

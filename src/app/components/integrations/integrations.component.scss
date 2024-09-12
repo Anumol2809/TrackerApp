@@ -1,0 +1,79 @@
+.inte_page{
+    background-color: #f5f4f4;
+   min-height: 98vh; 
+   padding:  6px  25px 15px 25px;
+   
+}
+.page_head{
+    font-size: 24px;
+    font-family: "Proxima_Nova_Bold";
+    padding-top: 6px;
+   
+}
+
+.card_box {
+    min-height: 200px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 6px #00000029;
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 20px 0 15px 0;
+    position: relative;
+  }
+  
+  .cardtext {
+    letter-spacing: 0px;
+    color: #707070;
+    font-size: 14px;
+    padding: 12px 58px 0 58px;
+    line-height: 18px;
+  }
+  
+  .subcardtext {
+    letter-spacing: 0px;
+    color: green;
+    font-family: "Proxima_Nova_Bold";
+    font-size: 14px;
+    line-height: 16px;
+  }
+  
+  .subcardtextfailure {
+    letter-spacing: 0px;
+    color: red;
+    font-family: "Proxima_Nova_Bold";
+    font-size: 14px;
+    line-height: 16px;
+  }
+  .cardimg {
+   // width: 84%;
+    height: auto;
+    cursor: pointer;
+  }
+  
+  .imgcrd {
+   // border-radius: 50%;
+    //border: 1px solid #5F6A7C;
+    //width: 120px;
+    
+    height: 120px;
+    //background: white;
+  
+  }
+  .pay::before {
+
+
+    position: absolute;
+    width: 8px;
+    height: 27%;
+    content: "";
+    background: #54cb6e 0% 0% no-repeat padding-box;
+    border-radius: 0px 10px 10px 0px;
+    opacity: 1;
+    top:35%;
+    left: 0px;
+  
+  }
+  .error{
+    width: 90% !important;
+    
+  }

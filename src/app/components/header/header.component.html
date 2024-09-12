@@ -1,0 +1,61 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark header_nav ">
+    <div class="container-fluid ">
+      <!-- <ul class="navbar-nav">
+        <li class="nav-item nav-left">
+            <a href="Javascript:void(0)">Invoice</a>
+        </li>
+        <li class="nav-item nav-left">
+            <a href="Javascript:void(0)">Customers</a>
+        </li>
+    </ul> -->
+        <div class="navbar-collapse">
+            <ul class="navbar-nav">
+                
+                <li class="nav-item "  ngbDropdown>
+                    <a class=" active_cls int_link" ngbDropdownToggle>
+                        {{selected_int}}
+                         <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-menu ">
+                            <div *ngFor="let sys of Systems">
+
+                                <button ngbDropdownItem class="logout_btn"  (click)="selectInt(sys)" >
+                                    {{sys.name}}</button>
+                             
+                            <!-- <button ngbDropdownItem class="logout_btn"  (click)="selectInt(1)">
+                                Salesforce</button> -->
+                             
+                            </div>
+                         </div>
+                     </a>
+                    </li>
+            <li class="nav-item " ngbDropdown>
+                <!-- <i class="fa fa-bell bell_icon"></i> -->
+                <a class=" active_cls" ngbDropdownToggle>
+                    <img class="dn_icon" src="assets/images/quickbk.png">
+                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-menu ">
+                         <button ngbDropdownItem class="logout_btn"  routerLink="/add-company">
+                             Add Company</button>
+                         <button ngbDropdownItem class="logout_btn"  routerLink="/switch-company"> Switch Company</button>
+        
+                     </div>
+                 </a>
+                
+            </li>
+           <li class="nav-item "  ngbDropdown>
+            <a class=" active_cls" ngbDropdownToggle>
+                <i class="fa fa-user user_icon"></i>
+                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-menu ">
+                     <button ngbDropdownItem class="logout_btn"  (click)="signIn()">
+                         Login</button>
+                     <button ngbDropdownItem class="logout_btn" (click)="signOut()"> Logout</button>
+    
+                 </div>
+             </a>
+            </li>
+        </ul>
+        </div>
+       
+      
+    </div>
+  </nav>
+  

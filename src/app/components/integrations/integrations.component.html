@@ -1,0 +1,27 @@
+<div class="inte_page">
+    <div class=" errordiv text-center" *ngIf="errorMsgFlag">
+        <p class="error">{{errorMsg}}</p>
+    </div>
+    <h1 class="page_head">Connect to CRMs</h1>
+
+
+    <div class="row ">
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 text-center" *ngFor="let card of ConnSys">
+            <div class="card_box">
+                <div class="pay"></div>
+                <div class="imgcrd mx-auto d-flex  align-items-center">
+                    <img class="cardimg mx-auto" [src]="card.image" (click)="Payment(card.sysId)">
+                </div>
+
+                <p class="cardtext">{{card.content}}</p>
+                <div class="hgtset">
+                    <p *ngIf="card.onboarded" class="subcardtext m-0"> <i class="fa fa-check"></i>Onboarded</p>
+                    <p *ngIf="!card.onboarded" class="subcardtextfailure m-0"> <i class="fa fa-close"></i>Not Onboarded
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

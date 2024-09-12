@@ -1,0 +1,112 @@
+<div class="login_page ">
+   
+    <div class="row m-0">
+        <div class="col-6 text-center bglogin">
+            <div class="jumbotron">
+                <form [formGroup]="LoginForm">
+                    <div class="img">
+                        <img src="assets/images/Logo.png" width="125" height="76">
+                    </div>
+    
+                     <div *ngIf="loading">
+                        <p class="loadtext blink_me">Signing In. Please wait...</p>
+                    </div> 
+    
+                    <div id="Library" (click)="SignInWithIntuit()" [hidden]="loading"></div>
+    
+    
+                    <div>
+                        <hr class="dashed" />
+                    </div>
+    
+                    <div id="Google_sign"></div>
+                    <div>
+                        <hr class="dashed" />
+                    </div>
+                    <!-- <div class="or">Or</div> -->
+                    <div class="signtext text-left"><b class="sign">Sign In</b></div>
+    
+                    <div class="input">
+                        <div class="input-group">
+                            <div class="input-group ">
+                                <span class="input-group-addon"><i class="fa fa-envelope "></i></span>
+                                <input id="email" type="text" class="form-control " name="email" formControlName="email"
+                                    placeholder="Email Id">
+    
+    
+                            </div>
+                            <div *ngIf="submitted && f['email'].errors" class="text-start error pos_absolute">
+                                <div *ngIf="f['email'].errors['required']"> Email id is required</div>
+                                <div *ngIf="f['email'].errors['email']">Valid email id is required</div>
+                            </div>
+                        </div>
+    
+                        <div class="input-group">
+                            <div class="input-group ">
+                                <span class="input-group-addon"><i class="fa fa-lock "></i></span>
+                                <input id="password" type="password" class="form-control " name="password"
+                                    formControlName="password" placeholder="Password">
+    
+    
+                            </div>
+                            <div *ngIf="submitted && f['password'].errors" class="text-start error pos_absolute">
+                                <div *ngIf="f['password'].errors['required']">Password is required</div>
+                            </div>
+                        </div>
+    
+                    </div>
+                    <div class="forget text-right ">
+                        <a class="forget" routerLink="/forgot-password"><u>Forgot Password ?</u></a>
+                    </div>
+                    <div class=" errordiv text-center " *ngIf="errorMsgFlag">
+                        <p class="error">{{errorMsg}}</p>
+                    </div>
+                    <div class="pt-1"><button class="btn sign-btn  btn-block" (click)="SignIn()">Sign In</button></div>
+    
+                    <div class="label text-right"><label><b class="agree">Don't have a account? <a class="term" href="#"
+                                    routerLink="/sign-up">
+                                    Sign up here</a></b></label></div>
+    
+    
+                </form>
+                <div class="footer">© Dancing Numbers</div>
+            </div>
+            
+        </div>
+        <div class="col-6  bglogo">
+            <!-- <img src="assets/images/Logo.png" class="logo"> -->
+            <!-- <form [formGroup]="LoginForm">
+                <div class="form-group">
+                    <label for="email" class="user_label">Username</label>
+                    <input id="email" type="text" class="form-control " name="email" formControlName="email"
+                            placeholder="Email Id">
+
+                    <div *ngIf="submitted && f.email.errors" class="error pos_absolute">
+                        <div *ngIf="f.email.errors.required"> Email id is required</div>
+                        <div *ngIf="f.email.errors.email">Valid email id is required</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="user_label">Password</label>
+                    <input id="password" type="text" class="form-control " name="password" formControlName="password"
+                            placeholder="Password">
+
+                    <div *ngIf="submitted && f.password.errors" class="error pos_absolute">
+                        <div *ngIf="f.password.errors.required"> Password is required</div>
+                    </div>
+                </div>
+
+                <button class="btn form_btn" (click)="OnSubmit()">Log in</button>
+
+                <p class="or_text">OR</p>
+                <button class="btn" id="Google_sign" (click)="signInWithGoogle()">Sign In with google</button>
+            </form> -->
+             <h1 class="login_head">Reduce manual process and </h1>
+             <!-- <img src="assets/images/log_img.jpg" class="logo ">  -->
+             <h1 class="login_head login_main">switch to Automation</h1>
+               
+        </div>
+    </div>
+</div>
+

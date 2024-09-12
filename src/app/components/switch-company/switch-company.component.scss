@@ -1,0 +1,106 @@
+.switch-sec {
+    height: 85px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    opacity: 1;
+    width: 100%;
+    padding: 20px;
+    ;
+  }
+  .switchcomp{
+    min-height: 100vh;
+  }
+  .switch {
+    font-size: 22px;
+    line-height: 45px;
+    font-family: 'Proxima_Nova_Bold' !important;
+    color: rgba(24, 30, 51, 1);
+  }
+  .fa-check{
+    color: #7cd46c;
+  }
+  .swtichtab {
+    padding: 20px 35px 20px 35px;
+    ;
+  }
+  
+  .table thead {
+    background-color: #f7f7f7;
+  }
+  
+  .errordiv {
+    padding-top: 10px;
+  }
+  
+  .table {
+    border: 1px solid #D3D3D3 !important;
+  }
+  
+  .select {
+    font-size: 18px;
+    text-align: left;
+    color: #333333;
+  }
+  
+  .cust_previous_btn,
+  .cust_next_btn {
+    padding: inherit !important
+  }
+  
+  .back {
+    background-color: #c4e4c5 !important;
+    padding: 40px
+  }
+  
+  @media only screen and (max-width: 437px) {
+    .switch {
+      font-size: 18px !important;
+    }
+  }
+  
+  @media only screen and (max-width: 570px) {
+  
+    .swtichtab {
+      padding: 20px 5px 20px 5px;
+    }
+  }
+  
+
+
+  .add_box {
+    border: 1px solid #0B8843;
+    border-radius: 8px;
+    margin-top:40px;
+    padding: 20px;
+  
+  }
+  
+  .add_text {
+    font-size: 16px;
+    color: #333333;
+    text-align: center;
+  }
+ 
+   .add_comp{
+    box-shadow: 0 -4px 4px -4px rgba(0, 0, 0, 0.2);
+   }
+  .add {
+    font-size: 22px;
+    line-height: 45px;
+    font-family: 'Proxima_Nova_Bold' !important;
+    color: rgba(24, 30, 51, 1);
+    padding-left: 30px;
+  }
+  .image {
+    background: url("../../../assets/images/quickbtn.png") no-repeat;
+    width: 222px;
+    ;
+    height: 48px;
+    cursor: pointer
+  }
+  
+  .image:hover {
+    background: url("../../../assets/images/quick_btnh.png") no-repeat;
+  
+  }
+  
